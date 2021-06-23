@@ -25,7 +25,21 @@ export const authMethods = {
         setErrors(prev => ([...prev, err.message]))
       })
   },
-  signout: (email, password) => {
-
+  signout: (setErrors, setToken) => {
+    // signOut is a no argument function
+    firebase.auth().signOut().then(res => {
+      //remove the token
+      localStorage.removeItem('token')
+      //set the token back to original state
+      setToken(null)
+    })
+      .catch(err => {
+        //there shouldn't ever be an error from firebase but just in case
+        setErrors(prev => ([...prev, err.message]))
+        //whether firebase does the trick or not i want my user to do there thing.
+        localStorage.removeItem('token')
+        setToken(null)
+        console.error(err.message)
+      })
   },
 }

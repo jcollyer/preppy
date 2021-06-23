@@ -4,14 +4,12 @@ import { firebaseAuth } from '../provider/AuthProvider'
 const Signin = () => {
   const { handleSignin, inputs, setInputs, errors } = useContext(firebaseAuth);
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('handleSubmit')
+    e.preventDefault();
     handleSignin();
   }
   const handleChange = e => {
-    const { name, value } = e.target
-    // console.log(inputs)
-    setInputs(prev => ({ ...prev, [name]: value }))
+    const { name, value } = e.target;
+    setInputs(prev => ({ ...prev, [name]: value }));
   }
   return (
     <form onSubmit={handleSubmit}>
