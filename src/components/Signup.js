@@ -2,12 +2,24 @@ import React, { useContext } from 'react';
 import { firebaseAuth } from '../provider/AuthProvider'
 
 const Signup = () => {
-  const { handleSignup } = useContext(firebaseAuth);
-  console.log(handleSignup)
+  const { handleSignup, inputs, setInputs } = useContext(firebaseAuth);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('handleSubmit')
+    handleSignup();
+  }
+  const handleChange = e => {
+    const { name, value } = e.target
+    // console.log(inputs)
+    setInputs(prev => ({ ...prev, [name]: value }))
+  }
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       Signup
-    </div>
+      <input onChange={handleChange} name="email" placeholder='email' value={inputs.email} />
+      <input onChange={handleChange} name="password" placeholder='password' value={inputs.password} />
+      <button>signup</button>
+    </form>
   );
 };
 
