@@ -11,7 +11,8 @@ const AuthProvider = (props) => {
     // calling signup from firebase server
     const { email, password } = inputs;
     console.log('handleSignup', { email, password });
-    return authMethods.signup(inputs.email, inputs.password)
+    authMethods.signup(inputs.email, inputs.password, setErrors);
+    // console.log('---------', errors);
   }
   return (
     <firebaseAuth.Provider
@@ -19,6 +20,7 @@ const AuthProvider = (props) => {
         handleSignup,
         inputs,
         setInputs,
+        errors,
       }}>
       {props.children}
     </firebaseAuth.Provider>

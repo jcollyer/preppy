@@ -3,13 +3,14 @@ import firebase from 'firebase'
 
 export const authMethods = {
   // firebase helper methods go here... 
-  signup: (email, password) => {
+  signup: (email, password, setErrors) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res)
       })
       .catch(err => {
-        console.error(err)
+        console.error('-------->', err)
+        setErrors(prev => ([...prev, err.message]))
       })
   },
   signin: (email, password) => {
